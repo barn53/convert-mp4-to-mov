@@ -7,8 +7,14 @@ for fn in os.listdir('.'):
             p = subprocess.run(
                 ["ffmpeg",
                 "-i", fn,
+                "-n",
                 "-acodec", "copy",
                 "-vcodec", "copy",
-                "-f", "mov", fn[:-4] + ".mov"], stderr=subprocess.STDOUT, shell=True)
-            print (p)
+                "-f", "mov", fn[:-4] + ".mov"], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT, shell=False)
+            if p.returncode == 0:
+                os.remove(fn)
+                print("Converted " + fn)
+            else:
+                print("Skipped   " + fn)
+
 
