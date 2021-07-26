@@ -4,6 +4,7 @@ import subprocess
 for fn in os.listdir('.'):
     if os.path.isfile(fn):
         if fn.endswith(".mp4"):
+            print("mp4 file found: " + fn)
             p = subprocess.run(
                 ["ffmpeg",
                 "-i", fn,
@@ -16,5 +17,4 @@ for fn in os.listdir('.'):
                 print("Converted " + fn)
             else:
                 print("Skipped   " + fn)
-
 
